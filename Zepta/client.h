@@ -30,7 +30,8 @@ public:
     void send_room_code(std::string data);
     void connet_to_server();
     QTcpSocket *tcpSocket;
-
+    void send_public_key(char* data);
+    void send_encrypted_message(char* data);
     QByteArray recieve_code();
 private:
     QDataStream in;

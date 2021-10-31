@@ -18,6 +18,7 @@
 #include <openssl/pem.h>
 #include <openssl/err.h>
 #include "rsa.h"
+#include <fstream>
 
 int main(int argc, char ** argv)
 {
@@ -25,8 +26,14 @@ int main(int argc, char ** argv)
 
 
     QStackedWidget window;
-    loginScreen log;
     rsa RSAA;
+
+    loginScreen log(&RSAA);
+    char plainText[2048/8] = "Hello this is Oliver";
+
+    auto data = RSAA.encrypt_data(plainText, RSAA.public_key_path_name);
+    auto de =  RSAA.decrypy_data(data, RSAA.private_key_path_name);
+
 
     window.setWindowTitle("Zepta");
     window.addWidget(&log);

@@ -16,20 +16,25 @@
 #include <QRect>
 #include <iostream>
 #include "client.h"
+#include "rsa.h"
 class loginScreen : public QDialog
 {
 public:
 
-    loginScreen();
+    loginScreen(rsa *rsaptr);
     ~loginScreen();
 
+    client *cli;
 
 private:
-    client *cli;
+    rsa *rsaptr;
     QLineEdit *room_code;
+    QLineEdit *data_to_send;
     QLabel *background;
     QPushButton *button;
+    QPushButton *send_button;
     QLabel *display_text;
     void button_func();
+    void button_func_send();
 
 };
