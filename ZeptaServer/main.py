@@ -51,7 +51,7 @@ def find_encrypted_message(num):
         buffer = buffer[:len(buffer)-1]
         conn.sendall(bytes(buffer.encode("utf-8")))
         c = conn.recv(2048) #get encrypted data
-        print(c.decode("utf-8") + "efeefef")
+        print(c.decode("utf-8"))
 
         myFile.close()
     with open('messages.txt', 'r+') as f:  # r+ does the work of rw

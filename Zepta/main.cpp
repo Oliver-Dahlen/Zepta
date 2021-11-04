@@ -29,11 +29,6 @@ int main(int argc, char ** argv)
     rsa RSAA;
 
     loginScreen log(&RSAA);
-    char plainText[2048/8] = "Hello this is Oliver";
-
-    auto data = RSAA.encrypt_data(plainText, RSAA.public_key_path_name);
-    auto de =  RSAA.decrypy_data(data, RSAA.private_key_path_name);
-
 
     window.setWindowTitle("Zepta");
     window.addWidget(&log);

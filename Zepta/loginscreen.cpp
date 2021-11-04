@@ -12,7 +12,7 @@ loginScreen::loginScreen(rsa *rsap)
     cli = new client();
     display_text = new QLabel(this);
 
-    background->setGeometry(QRect(0,0,420,665));
+    background->setGeometry(QRect(0,0,420,670));
     background->setPixmap(QPixmap( ":/resources/img/background.png" ));
     background->setScaledContents(true);
 
@@ -24,7 +24,7 @@ loginScreen::loginScreen(rsa *rsap)
     room_code->setPlaceholderText("Room code");
     room_code->setStyleSheet("border: 2px solid white;\n border-radius: 10px;\ncolor: rgb(255, 255, 255); background: rgb(54, 54, 54);");
 
-    display_text->setText("rthfththfhf");
+    display_text->setText("Text to be displayed");
     display_text->setGeometry(QRect(100,100,291,31));
 
     data_to_send->setGeometry(QRect(0,32,291,31));
@@ -49,7 +49,7 @@ void loginScreen::button_func()
 
     if(cli->tcpSocket->state() == QAbstractSocket::ConnectedState) // make sure that we have connection to sever before we send send room code;
     {
-    cli->send_room_code("43634");
+    cli->send_room_code(room_code->displayText().toStdString());
     auto message = cli->recieve_code();
     display_text->setText(message);
 
@@ -67,7 +67,7 @@ void loginScreen::button_func()
     rsaptr->file->open(QIODevice::WriteOnly);
     rsaptr->file->write(message.data());
     rsaptr->file->close();
-    auto y = rsaptr->encrypt_data("feefef", "public_key_room.txt");
+    auto y = rsaptr->encrypt_data("encrypt", "public_key_room.txt");
 
     QByteArray jj = y;
 
@@ -87,7 +87,7 @@ void loginScreen::button_func()
         QByteArray kk = megg;
         qDebug() << megg;
         qDebug() << kk.fromBase64(kk.data()).data();
-        qDebug() <<jj.data();
+        qDebug() <<kk.fromBase64(kk.data()).data();
         qDebug() << rsaptr->decrypy_data(kk.fromBase64(kk.data()).data(), rsaptr->private_key_path_name);
     }
 
